@@ -17,10 +17,10 @@
             <p><b>Tel.: </b>{{ pet.phone }}</p>
             <p><b>E-mail.: </b>{{ pet.email }}</p>
             {% if request.user == pet.user %}
-            <a href="#">
-                <button type="button" class="btn btn-primary">Alterar</button>
-            </a>
-            <button type="button" class="btn btn-danger">Excluir</button>
+                <a href="#">
+                    <button type="button" class="btn btn-primary">Alterar</button>
+                </a>
+                   <button type="button" class="btn btn-danger">Excluir</button>
             {% endif %}
         </div>
     </div>
