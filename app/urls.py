@@ -29,6 +29,7 @@ urlpatterns = [
     path('login/submit', views.submit_login),
     path('logout/', views.logout_user),
     path('pet/register/', views.register_pet),
+    path('pet/register/submit', views.set_pet),
     path('', RedirectView.as_view(url='pet/all/'))
 ]
 urlpatterns += staticfiles_urlpatterns()

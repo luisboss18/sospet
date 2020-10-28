@@ -8,8 +8,22 @@ from django.contrib.auth.decorators import login_required
 from .models import Pet
 
 
+@login_required(login_url='/login/')
 def register_pet(request):
     return render(request,'register-pet.html')
+
+
+@login_required(login_url='/login/')
+def set_pet(request):
+    city = request.POST.get('city')
+    email = request.POST.get('email')
+    phone = request.POST.get('phone')
+    description = request.POST.get('descriptsion')
+    file = request.FILES.get('file')
+    user = request.user
+    pet = Pet.objects.create(email=email, phone=phone, description=description, 
+                             photo=photo, city=city, user=user)                            
+    return redirect('/')
 
 @login_required(login_url='/login/')
 def list_all_pets(request):
