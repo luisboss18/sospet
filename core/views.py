@@ -22,7 +22,14 @@ def set_pet(request):
     file = request.FILES.get('file')
     user = request.user
     pet = Pet.objects.create(email=email, phone=phone, description=description, 
-                             photo=photo, city=city, user=user)                            
+                             photo=photo, city=city, user=user)
+    url = '/pet/detail{}/'.format(pet.id)                                                     
+    return redirect(url)
+
+@login_required(login_url='/login/')
+def delete_pet(request, id):
+    pet = Pet.objects.get(id=id)
+    pet.delete()
     return redirect('/')
 
 @login_required(login_url='/login/')
