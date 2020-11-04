@@ -29,7 +29,8 @@ def set_pet(request):
 @login_required(login_url='/login/')
 def delete_pet(request, id):
     pet = Pet.objects.get(id=id)
-    pet.delete()
+    if pet.user == request.user:
+        pet.delete()
     return redirect('/')
 
 @login_required(login_url='/login/')

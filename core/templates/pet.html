@@ -4,6 +4,23 @@
 
 <h1 class="text-center"> Detalhes do pet </h1>
 
+<!-- Ini Modal -->
+<div class="modal" id="modal_confirm">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"> Deseja realmente excluir? </h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body text-right">
+                
+            </div>
+        
+        </div>
+    </div>
+</div>
+
+
 <div class="container mp-4 mb-4">
     <div class="row">
         <div class="col-sm-4">
@@ -19,10 +36,9 @@
             {% if request.user == pet.user %}
                 <a href="#">
                     <button type="button" class="btn btn-primary">Alterar</button>
-                </a>
-                <a href="/pet/delete/{{ pet.id }}/">
-                   <button type="button" class="btn btn-danger">Excluir</button>
-                   </a>
+                </a>           
+                <button type="button" class="btn btn-danger" data-toggle="modal"
+                        data-target="#modal_confirm">Excluir</button>              
             {% endif %}
         </div>
     </div>
