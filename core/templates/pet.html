@@ -5,7 +5,7 @@
 <h1 class="text-center"> Detalhes do pet </h1>
 
 <!-- Ini Modal -->
-<div class="modal" id="modal_confirm">
+<div class="modal fade" id="modal_confirm">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -13,6 +13,14 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body text-right">
+                <a href="/pet/delete/{{ pet.id }}/">
+                    <button type="button" class="btn btn-danger">
+                        EXCLUIR
+                    </button>
+                </a>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        CANCELAR
+                    </button>
                 
             </div>
         
@@ -25,7 +33,10 @@
     <div class="row">
         <div class="col-sm-4">
             <div style="border-color: green; border-style: solid; width:356px; height:300px;">
+                {% if pet.photo %}
                 <img src="{{pet.photo.url}}" width="350" heigth="263" style="margin-top:16px">
+                {% endif %}
+
             </div>
         </div>
         <div class="col-sm-8">
@@ -34,7 +45,7 @@
             <p><b>Tel.: </b>{{ pet.phone }}</p>
             <p><b>E-mail.: </b>{{ pet.email }}</p>
             {% if request.user == pet.user %}
-                <a href="#">
+                <a href="/pet/register/?id={{ pet.id }}">
                     <button type="button" class="btn btn-primary">Alterar</button>
                 </a>           
                 <button type="button" class="btn btn-danger" data-toggle="modal"

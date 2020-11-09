@@ -24,7 +24,9 @@
             <div class="col-sm-4">
                 <a href="../detail/{{ p.id }}">
                     <div class="polaroid" >
+                        {% if p.photo %}
                         <img src="{{ p.photo.url }}" style="width:100%">
+                        {% endif %}
                         <div class="container">
                             <p>{{ p.city }}</p>  
                         </div>  
