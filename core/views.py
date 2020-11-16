@@ -13,8 +13,8 @@ def register_pet(request):
     pet_id = request.GET.get('id')
     if pet_id:
         pet = Pet.objects.get(id=pet_id)
-        print(pet.city)
-        return render(request, 'register-pet.html', {'pet':pet})
+        if pet.user == request.user:
+            return render(request, 'register-pet.html', {'pet':pet})
     return render(request,'register-pet.html')
 
 
@@ -25,8 +25,20 @@ def set_pet(request):
     phone = request.POST.get('phone')
     description = request.POST.get('description')
     file = request.FILES.get('file')
+    pet_id = request.POST.get('pet-id')
     user = request.user
-    pet = Pet.objects.create(email=email, phone=phone, description=description, 
+    if pet_id:
+        pet = Pet.objects.get(id=pet_id)
+        if user == pet.user:
+            pet.email = email
+            pet.phone = phone
+            pet.city = city
+            pet.description = description
+            if file:
+                pet.photo = file
+            pet.save()
+    else:    
+        pet = Pet.objects.create(email=email, phone=phone, description=description, 
                              photo=file, city=city, user=user)
     url = '/pet/detail/{}/'.format(pet.id)                                                     
     return redirect(url)
